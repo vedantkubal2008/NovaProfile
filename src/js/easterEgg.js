@@ -5,7 +5,6 @@
  * 2. Typing the secret Konami-style code "BABY"
  */
 
-import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/+esm';
 import { sounds } from './audio.js';
 import { awardBadge, getEarnedBadges, renderBadges } from './achievements.js';
 
@@ -68,13 +67,14 @@ export function initEasterEgg() {
     sounds.playChime(1046.50, 0.3); // High C6
     setTimeout(() => sounds.playTwinkle(), 150);
 
-    // Confetti explosion using haX.baby palette
-    confetti({
-      particleCount: 110,
-      spread: 90,
-      origin: { y: 0.6 },
-      colors: ['#ffd166', '#ff8066', '#56dfbe', '#65dcf2', '#f2fcff', '#9bbac5']
-    });
+    import('https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/+esm')
+      .then(({ default: confetti }) => confetti({
+        particleCount: 110,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: ['#ffd166', '#ff8066', '#56dfbe', '#65dcf2', '#f2fcff', '#9bbac5']
+      }))
+      .catch(() => {});
 
     if (modal) {
       modal.hidden = false;

@@ -19,10 +19,46 @@ import { renderBadges } from './achievements.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.documentElement;
+  const menuButton = document.getElementById('nav-menu-toggle');
+  const primaryNav = document.getElementById('primary-nav');
   const bedtimeButton = document.getElementById('bedtime-toggle-btn');
   const bedtimeCompanion = document.getElementById('bedtime-companion');
   const bedtimeNova = document.getElementById('bedtime-mini-nova');
   let bedtimeStartedLullaby = false;
+
+  function closeNavigation() {
+    if (!menuButton || !primaryNav) return;
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation');
+    menuButton.title = 'Open navigation';
+    menuButton.innerHTML = '<span aria-hidden="true">☰</span><span class="nav-menu-label">Menu</span>';
+    primaryNav.classList.remove('is-open');
+  }
+
+  if (menuButton && primaryNav) {
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') !== 'true';
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      menuButton.title = isOpen ? 'Close navigation' : 'Open navigation';
+      menuButton.innerHTML = isOpen
+        ? '<span aria-hidden="true">×</span><span class="nav-menu-label">Close</span>'
+        : '<span aria-hidden="true">☰</span><span class="nav-menu-label">Menu</span>';
+      primaryNav.classList.toggle('is-open', isOpen);
+    });
+    primaryNav.addEventListener('click', (event) => {
+      if (event.target.closest('a')) closeNavigation();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+        closeNavigation();
+        menuButton.focus();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeNavigation();
+    });
+  }
 
   function applyLocalSky() {
     const hour = new Date().getHours();

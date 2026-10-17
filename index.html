@@ -37,14 +37,23 @@
         <span>Nova</span>
       </a>
 
-      <nav class="nav-links" aria-label="Primary Navigation">
+      <button id="nav-menu-toggle" class="nav-menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation" title="Open navigation">
+        <span aria-hidden="true">☰</span><span class="nav-menu-label">Menu</span>
+      </button>
+
+      <nav id="primary-nav" class="nav-links" aria-label="Primary Navigation">
         <a href="#about" class="nav-link">My Mission</a>
         <a href="#showcase" class="nav-link">My Inventions</a>
         <a href="#story" class="nav-link">My Bedtime Story</a>
         <a href="#guestbook" class="nav-link">My Mission Log</a>
-        <a href="./game.html" class="nav-link">Dodge Game</a>
-        <a href="./gallery.html" class="nav-link">Nova Gallery</a>
-        <a href="./chat.html" class="nav-link" style="color: #ffd166; font-weight: 700;">Talk to Me 💬</a>
+        <details class="nav-more">
+          <summary class="nav-link">Explore</summary>
+          <div class="nav-more-menu">
+            <a href="./game.html" class="nav-link">Dodge Game</a>
+            <a href="./gallery.html" class="nav-link">Nova Gallery</a>
+            <a href="./chat.html" class="nav-link">Talk to Me 💬</a>
+          </div>
+        </details>
       </nav>
 
       <div class="nav-actions">
