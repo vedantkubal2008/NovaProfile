@@ -1,5 +1,5 @@
 # 🚀 Nova the Pocket Cosmonaut | Baby's First Website
-> **Track 2: Original Character — Tier 3 Legendary Space Edition**  
+> **Track 2: **  
 > Built for the **haX.baby** 48-Hour Online Hackathon (17–19 October 2026)
 
 ---
@@ -64,3 +64,4 @@ Told through 4 interactive scroll scenes (all under 50 words each):
 npm run dev   # Live at http://localhost:5173/
 npm run build # Tested 0-error production bundle
 ```
+Project Link : https://vedantkubal2008.github.io/NovaProfile/
