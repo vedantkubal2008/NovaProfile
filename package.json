@@ -1,0 +1,18 @@
+{
+  "name": "loomi-star-weaver-portfolio",
+  "version": "1.0.0",
+  "description": "Baby's First Website Hackathon (Track 2: Loomi The Star-Weaver) - Tier 3 Legendary Entry",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "lucide": "^1.16.0"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
+}

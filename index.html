@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova the Pocket Cosmonaut | Baby's First Website</title>
+  <meta name="description" content="Meet Nova, the pocket astronaut exploring planets, mapping star routes, and drifting through a galaxy of bedtime adventures." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>" />
+
+  <!-- Google Fonts: Fraunces (Editorial Serif) & Fredoka (Bubbly Early-Web) & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Fredoka:wght@300..700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/src/styles/tokens.css" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="stylesheet" href="/src/styles/chaos.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Retro Marquee Ticker (Chaos Mode Bonus Quest) -->
+  <aside id="chaos-marquee" class="chaos-marquee-bar" hidden aria-label="Retro Space Marquee">
+    <div class="chaos-marquee-track">
+      🚀 MISSION CONTROL: WELCOME TO NOVA'S ZERO-G HOMEPAGE ★ CADET NO. 001 ★ ORBIT STATION-99 ★ BEST VIEWED AT 800x600 ★ CERTIFIED SPACE-SAFE ★ SLEEP TIGHT AMONG THE STARS ★
+    </div>
+  </aside>
+
+  <!-- Sticky Platform Navigation -->
+  <header class="navbar" role="banner">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-brand" aria-label="Nova Portfolio Home">
+        <div class="nav-brand-logo" aria-hidden="true">🚀</div>
+        <span>Nova</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#about" class="nav-link">My Mission</a>
+        <a href="#showcase" class="nav-link">My Inventions</a>
+        <a href="#story" class="nav-link">My Bedtime Story</a>
+        <a href="#guestbook" class="nav-link">My Mission Log</a>
+        <a href="/game.html" class="nav-link">Dodge Game</a>
+        <a href="/gallery.html" class="nav-link">Nova Gallery</a>
+        <a href="/chat.html" class="nav-link" style="color: #ffd166; font-weight: 700;">Talk to Me 💬</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Bonus Quest: Click Sounds & Accessible Mute Switch (+3 pts) -->
+        <button id="sound-toggle-btn" class="btn-pill" type="button" aria-pressed="false" aria-label="Radio Muted. Click to enable space audio">
+          🔇 <span class="btn-text">Unmute</span>
+        </button>
+
+        <!-- Theme Toggle: Deep Cosmos <-> Lunar Station -->
+        <button id="theme-toggle-btn" class="btn-pill" type="button" aria-label="Toggle Lunar Theme">
+          🌕 <span class="btn-text">Lunar Station</span>
+        </button>
+
+        <!-- Bonus Quest: Responsive Chaos Mode (+5 pts) -->
+        <button id="chaos-toggle-btn" class="btn-pill" type="button" aria-pressed="false" aria-label="Toggle Retro Space Chaos Mode">
+          🌀 <span class="btn-text">Chaos Mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <!-- Hero Section: Character Identity & Interactive Baby Astronaut Avatar -->
+    <section id="hero" class="hero-section" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-heading" class="hero-title">
+            Good dreams<br />
+            start in <em>zero-g.</em>
+          </h1>
+
+          <p class="hero-tagline">
+            I’m <strong>Nova</strong>, the pocket cosmonaut with my giant bubble helmet, my star-mapping mittens, and my tiny tools for fixing sleepy satellite antennas so Earth can drift into dreamland with me.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#showcase" class="btn-pill btn-primary">
+              I map orbit routes ↗
+            </a>
+            <a href="/gallery.html" class="btn-pill">
+              🌌 View Nova gallery
+            </a>
+            <a href="/chat.html" class="btn-pill">
+              💬 Chat with me
+            </a>
+            <a href="/game.html" class="btn-pill">
+              ☄️ Play asteroid dodge
+            </a>
+            <button id="lullaby-toggle-btn" class="btn-pill" type="button">
+              🎶 Play my lullaby
+            </button>
+            <button id="easter-egg-trigger" class="btn-icon" type="button" title="Launch my spaceship; click three times for a secret" aria-label="Launch Nova’s spaceship">
+              🛸
+            </button>
+          </div>
+
+          <!-- Character Identity Specification Sheet -->
+          <div class="character-bio-strip" aria-label="Nova Character Profile">
+            <div class="bio-stat">
+              <small>Species</small>
+              <strong>Pocket Cosmonaut</strong>
+            </div>
+            <div class="bio-stat">
+              <small>Craft</small>
+              <strong>Stellar Navigator</strong>
+            </div>
+            <div class="bio-stat">
+              <small>Quirk</small>
+              <strong>Giggles at Space Dust</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive 3D/SVG Avatar with Eye-Tracking, Zero-G Float & Waving Mitten -->
+        <div class="hero-avatar-card" id="loomi-interactive-avatar" role="region" aria-label="Interactive Baby Astronaut Character Stage">
+          <div class="avatar-halo" aria-hidden="true"></div>
+
+          <!-- Handcrafted Animated Baby Astronaut SVG -->
+          <svg class="astro-character-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nova the cute baby astronaut with eyes that track your cursor and waving mitten">
+            <defs>
+              <!-- Helmet & Visor Gradients -->
+              <linearGradient id="suitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="100%" stop-color="#e0d9f0" />
+              </linearGradient>
+              <linearGradient id="visorRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd166" />
+                <stop offset="100%" stop-color="#ff6599" />
+              </linearGradient>
+              <linearGradient id="glassReflection" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+                <stop offset="50%" stop-color="#70d6ff" stop-opacity="0.15" />
+                <stop offset="100%" stop-color="#ff70a6" stop-opacity="0.05" />
+              </linearGradient>
+              <radialGradient id="helmetInnerGaze" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#2c1e4a" />
+                <stop offset="100%" stop-color="#120c24" />
+              </radialGradient>
+            </defs>
+
+            <!-- Floating Umbilical Tether Cable -->
+            <path class="astro-tether" d="M 100 175 Q 85 195 60 190 T 25 185" fill="none" stroke="#ffd166" stroke-width="3" stroke-linecap="round" stroke-dasharray="4,3" />
+
+            <!-- Cute Helmet Bear Ears -->
+            <g class="astro-helmet-ears">
+              <circle cx="62" cy="46" r="15" fill="url(#suitGrad)" stroke="url(#visorRim)" stroke-width="3" />
+              <circle cx="62" cy="46" r="8" fill="#ffb8d2" opacity="0.75" />
+              <circle cx="138" cy="46" r="15" fill="url(#suitGrad)" stroke="url(#visorRim)" stroke-width="3" />
+              <circle cx="138" cy="46" r="8" fill="#ffb8d2" opacity="0.75" />
+            </g>
+
+            <!-- Life Support Backpack -->
+            <rect x="66" y="105" width="68" height="65" rx="16" fill="#4a386a" stroke="#ffd166" stroke-width="2" />
+            <!-- Oxygen gauge dots -->
+            <circle cx="80" cy="118" r="3.5" fill="#06d6a0" />
+            <circle cx="92" cy="118" r="3.5" fill="#70d6ff" />
+            <circle cx="104" cy="118" r="3.5" fill="#ff70a6" />
+
+            <!-- Padded Cosmonaut Body (Quilted Suit) -->
+            <ellipse cx="100" cy="142" rx="42" ry="34" fill="url(#suitGrad)" stroke="#c4b7d7" stroke-width="2.5" />
+            
+            <!-- Left Mitten (Interactive Waving Hand) -->
+            <g class="astro-hand-left" id="astro-hand-left">
+              <ellipse cx="60" cy="145" rx="13" ry="11" fill="#ff6599" stroke="#ffffff" stroke-width="2" />
+              <circle cx="60" cy="145" r="3" fill="#ffd166" />
+            </g>
+
+            <!-- Right Mitten (Interactive Waving Hand) -->
+            <g class="astro-hand-right astro-hand-wave" id="astro-hand-right">
+              <ellipse cx="140" cy="142" rx="13" ry="11" fill="#ff6599" stroke="#ffffff" stroke-width="2" />
+              <circle cx="140" cy="142" r="3" fill="#ffd166" />
+            </g>
+
+            <!-- Magnetic Booties with Star Grippers -->
+            <ellipse cx="84" cy="172" rx="14" ry="9" fill="#2d2248" stroke="#ff6599" stroke-width="2" />
+            <ellipse cx="116" cy="172" rx="14" ry="9" fill="#2d2248" stroke="#ff6599" stroke-width="2" />
+
+            <!-- Big Round Glossy Bubble Helmet Outer Rim -->
+            <circle cx="100" cy="85" r="48" fill="#ffffff" stroke="url(#visorRim)" stroke-width="4" />
+
+            <!-- Star Antenna with Pulsing Starlight LED -->
+            <line x1="100" y1="37" x2="100" y2="18" stroke="#ffd166" stroke-width="3" stroke-linecap="round" />
+            <circle class="astro-antenna-led" cx="100" cy="16" r="7" fill="#ffc038" />
+            <text x="96.5" y="19" font-size="8" fill="#5c4033" font-weight="bold">★</text>
+
+            <!-- Helmet Glass Interior Dark Visor -->
+            <circle cx="100" cy="85" r="41" fill="url(#helmetInnerGaze)" />
+
+            <!-- Chubby Baby Face inside helmet -->
+            <circle cx="100" cy="88" r="33" fill="#fff5ec" />
+
+            <!-- Big Sparkling Anime/Disney Eyes (Normal State) -->
+            <g class="astro-eyes-normal">
+              <!-- Left Eye -->
+              <circle cx="85" cy="86" r="12" fill="#1b1224" />
+              <g class="astro-pupil" style="transform-origin: 85px 86px;">
+                <circle cx="85" cy="86" r="5" fill="#ffd166" />
+                <circle cx="87.5" cy="83.5" r="3" fill="#ffffff" />
+                <circle cx="83.5" cy="88.5" r="1.5" fill="#ffffff" />
+              </g>
+
+              <!-- Right Eye -->
+              <circle cx="115" cy="86" r="12" fill="#1b1224" />
+              <g class="astro-pupil" style="transform-origin: 115px 86px;">
+                <circle cx="115" cy="86" r="5" fill="#ffd166" />
+                <circle cx="117.5" cy="83.5" r="3" fill="#ffffff" />
+                <circle cx="113.5" cy="88.5" r="1.5" fill="#ffffff" />
+              </g>
+            </g>
+
+            <!-- Happy Laughing Crescent Eyes (Active on Click/Laugh) -->
+            <g class="astro-eyes-happy" style="display: none;">
+              <path d="M 76 88 Q 85 75 94 88" stroke="#ff477e" stroke-width="4" fill="none" stroke-linecap="round" />
+              <path d="M 106 88 Q 115 75 124 88" stroke="#ff477e" stroke-width="4" fill="none" stroke-linecap="round" />
+              <text x="73" y="80" font-size="9" fill="#ffd166">✦</text>
+              <text x="120" y="80" font-size="9" fill="#ffd166">✦</text>
+            </g>
+
+            <!-- Glowing Rosy Blush Cheeks with Little Star Freckles -->
+            <g class="astro-blush-group">
+              <circle class="astro-blush" cx="74" cy="95" r="6" fill="#ff85ad" opacity="0.85" />
+              <text x="71" y="97" font-size="6" fill="#ffffff">★</text>
+              <circle class="astro-blush" cx="126" cy="95" r="6" fill="#ff85ad" opacity="0.85" />
+              <text x="123" y="97" font-size="6" fill="#ffffff">★</text>
+            </g>
+
+            <!-- Mouth: Normal Smiling Rocket Pacifier -->
+            <g class="astro-mouth-normal">
+              <path d="M 96 99 L 104 99 L 100 107 Z" fill="#ff6599" />
+              <circle cx="100" cy="98" r="4.5" fill="#ffd166" />
+            </g>
+
+            <!-- Mouth: Beaming Laughing Open Smile (Active on Click/Laugh) -->
+            <g class="astro-mouth-laugh" style="display: none;">
+              <path d="M 93 96 Q 100 110 107 96 Z" fill="#ff3366" stroke="#900c3f" stroke-width="1.5" />
+              <!-- Tiny tongue -->
+              <ellipse cx="100" cy="103" rx="4.5" ry="3" fill="#ff99bb" />
+            </g>
+
+            <!-- Glass Visor Curved Glare Reflection (Tracks with mouse) -->
+            <ellipse class="astro-visor-glare" cx="90" cy="72" rx="22" ry="12" fill="url(#glassReflection)" transform="rotate(-25 90 72)" pointer-events="none" />
+          </svg>
+
+          <!-- Floating Giggle Speech Bubble -->
+          <div id="astro-giggle-bubble" class="astro-giggle-bubble" aria-hidden="true">
+            Hehehe! 🚀✨
+          </div>
+
+          <p class="avatar-hint">
+            <span>👆</span> Click Nova to hear a baby giggle &amp; watch both hands wave!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase Projects Section (At Least 3 Orbital Projects) -->
+    <section id="showcase" class="showcase-section" aria-labelledby="showcase-heading">
+      <div class="container">
+        <span class="section-label">My Orbital Showcase</span>
+        <h2 id="showcase-heading" class="section-title">My little inventions</h2>
+        <p class="section-lead">
+          I chart safe star roads, bottle glowing nebula gas, and build dreamy little tools in my station lab so the whole galaxy can drift a little softer.
+        </p>
+
+        <div class="projects-grid">
+          <!-- Project 1: The Stellar Navigation Loom (Tier 3 Interactive Canvas Toy) -->
+          <article class="project-card-featured" aria-labelledby="loom-title">
+            <div class="project-info">
+              <span class="card-tag">Project 01 · My glowing navigation toy</span>
+              <h3 id="loom-title" class="card-title">My Stellar Navigation Loom</h3>
+              <p class="card-desc">
+                I drag soft light lines between the stars and map a gentle path through the cosmos. Every new route makes my little radio hum with a happy space-synth tune.
+              </p>
+              <div class="project-actions">
+                <button id="loom-shuffle-btn" class="btn-pill" type="button">
+                  ✨ I align my star relays
+                </button>
+                <button id="loom-clear-btn" class="btn-pill" type="button">
+                  🧹 I reset my telemetry
+                </button>
+              </div>
+            </div>
+
+            <div class="loom-canvas-wrapper" role="region" aria-label="Stellar Navigation Canvas">
+              <canvas id="loom-canvas" aria-label="Interactive space map. Drag between stars to connect orbital lines."></canvas>
+              <div class="loom-controls">
+                <span id="loom-feedback" class="loom-feedback-pill">
+                  Drag between glowing beacons to map an orbital path!
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Nebula Capsule Laboratory (Interactive Shader & Particle Jars) -->
+          <article class="project-card-half" id="aurora-showcase-card" aria-labelledby="aurora-title">
+            <div>
+              <span class="card-tag">Project 02 · My stardust fuel lab</span>
+              <h3 id="aurora-title" class="card-title">My Nebula Capsule Lab</h3>
+              <p class="card-desc">
+                I trap glowing nebula gas in tiny pressurized jars and use it to keep my rocket engines cozy. Pick a sample below and watch my lab swirl with sleepy stardust light.
+              </p>
+
+              <div class="aurora-selectors" role="group" aria-label="Nebula Gas Essences">
+                <button class="aurora-vial-btn is-active" data-essence="lavender" type="button">
+                  🪐 Aurora Bloom (659Hz)
+                </button>
+                <button class="aurora-vial-btn" data-essence="solargold" type="button">
+                  🟡 Solar Flare Amber (784Hz)
+                </button>
+                <button class="aurora-vial-btn" data-essence="glacier" type="button">
+                  🔵 Andromeda Mist (880Hz)
+                </button>
+                <button class="aurora-vial-btn" data-essence="twilight" type="button">
+                  🌊 Comet Teal (523Hz)
+                </button>
+              </div>
+            </div>
+
+            <div class="aurora-stage">
+              <div class="aurora-jar-box" aria-hidden="true">
+                <canvas id="aurora-canvas"></canvas>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: Interstellar Milk-Route Airpaths (Interactive Flight Map) -->
+          <article class="project-card-half" aria-labelledby="map-title">
+            <div>
+              <span class="card-tag">Project 03 · My sleepy delivery routes</span>
+              <h3 id="map-title" class="card-title">My Interstellar Milk-Routes</h3>
+              <p class="card-desc">
+                I fly warm star-milk and dream cassettes through zero-gravity lanes to sleepy satellites and lunar nurseries all across the night sky.
+              </p>
+
+              <div class="character-bio-strip" style="margin-bottom: 20px;">
+                <div class="bio-stat">
+                  <small>Active Orbits</small>
+                  <strong>48 Satellites</strong>
+                </div>
+                <div class="bio-stat">
+                  <small>Zero-G Drift</small>
+                  <strong>100% Smooth</strong>
+                </div>
+                <div class="bio-stat">
+                  <small>Dreams Logged</small>
+                  <strong>11.4k Units</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="map-stage" role="img" aria-label="Interactive orbital flight map showing space stations">
+              <svg class="map-svg" viewBox="0 0 320 160">
+                <!-- Orbital Flight Path -->
+                <path d="M 20 130 Q 90 20 160 90 T 300 40" fill="none" stroke="#ffd166" stroke-width="2.5" stroke-dasharray="6,6" />
+                
+                <!-- Waypoints -->
+                <g class="map-checkpoint" transform="translate(20, 130)">
+                  <circle r="8" fill="#ff6599" />
+                  <circle r="4" fill="#ffffff" />
+                  <title>Earth Launch Bay-01</title>
+                </g>
+                <g class="map-checkpoint" transform="translate(100, 55)">
+                  <circle r="8" fill="#ffc038" />
+                  <circle r="4" fill="#ffffff" />
+                  <title>Apollo-99 Lunar Relay</title>
+                </g>
+                <g class="map-checkpoint" transform="translate(160, 90)">
+                  <circle r="8" fill="#70d6ff" />
+                  <circle r="4" fill="#ffffff" />
+                  <title>Midnight Space Nursery Station</title>
+                </g>
+                <g class="map-checkpoint" transform="translate(300, 40)">
+                  <circle r="10" fill="#ff6599" />
+                  <circle r="5" fill="#ffd166" />
+                  <title>Saturn Rings Beacon</title>
+                </g>
+              </svg>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Origin Story Section: Scroll-Driven Bedtime Cosmonaut Journey (<150 words per scene) -->
+    <section id="story" class="story-section" aria-labelledby="story-heading">
+      <div class="container">
+        <div class="story-header">
+          <span class="section-label">My Origin Story</span>
+          <h2 id="story-heading" class="section-title">My bedtime journey</h2>
+          <p class="section-lead" style="margin: 0 auto;">
+            I scroll through my zero-gravity bedtime log and tell you the little story of how I grew into a star-sleeping explorer.
+          </p>
+
+          <div class="story-progress-indicator" aria-label="Story chapter progress">
+            <button class="story-dot is-current" aria-label="Go to Chapter 1"></button>
+            <button class="story-dot" aria-label="Go to Chapter 2"></button>
+            <button class="story-dot" aria-label="Go to Chapter 3"></button>
+            <button class="story-dot" aria-label="Go to Chapter 4"></button>
+          </div>
+          <p id="story-active-chapter" class="card-tag" style="margin-top: 12px;">Scene 1: The Crib on Apollo-99</p>
+        </div>
+
+        <div class="story-scenes-track">
+          <!-- Scene 1 (<50 words) -->
+          <article class="story-scene is-active-scene" data-scene-index="0">
+            <div class="scene-icon-box" aria-hidden="true">🛸</div>
+            <div>
+              <h3 class="scene-heading">01. My crib on Apollo-99</h3>
+              <p class="scene-text">
+                I was born aboard orbital research station Apollo-99, rocked to sleep by gentle lunar gravity and the hum of the life-support engines. Instead of a wooden mobile, I watched real shooting stars streak past my nursery viewport.
+              </p>
+            </div>
+          </article>
+
+          <!-- Scene 2 (<50 words) -->
+          <article class="story-scene" data-scene-index="1">
+            <div class="scene-icon-box" aria-hidden="true">🌌</div>
+            <div>
+              <h3 class="scene-heading">02. My first float outside the air-lock</h3>
+              <p class="scene-text">
+                During my very first zero-gravity crawl, curiosity proved stronger than any safety tether. I drifted into a shimmering cloud of stardust and learned that weightlessness is just the universe’s way of giving everyone room to fly.
+              </p>
+            </div>
+          </article>
+
+          <!-- Scene 3 (<50 words) -->
+          <article class="story-scene" data-scene-index="2">
+            <div class="scene-icon-box" aria-hidden="true">🛰️</div>
+            <div>
+              <h3 class="scene-heading">03. My starlight repair station</h3>
+              <p class="scene-text">
+                I packed my tiny magnetic wrench and a spool of glowing constellation wire, set up shop on an abandoned satellite dish, and tuned radio frequencies so lullabies from Earth could reach the furthest moons.
+              </p>
+            </div>
+          </article>
+
+          <!-- Scene 4 (<50 words) -->
+          <article class="story-scene" data-scene-index="3">
+            <div class="scene-icon-box" aria-hidden="true">🪐</div>
+            <div>
+              <h3 class="scene-heading">04. My bedtime in zero gravity</h3>
+              <p class="scene-text">
+                Now, when ground control signals lights-out, I click my helmet comms to Sleep Mode, float into my tethered sleeping cocoon, and watch Earth glow like a soft blue nightlight. I whisper goodnight to the stars and dream in the quiet dark.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community & Bonus Side Quests Section: Live Mission Log Wall (+2 pts) -->
+    <section id="guestbook" class="community-section" aria-labelledby="guestbook-heading">
+      <div class="container">
+        <span class="section-label">My Space Radio Log</span>
+        <h2 id="guestbook-heading" class="section-title">Leave me a note in my logbook</h2>
+        <p class="section-lead">
+          I love cozy messages and bedtime wishes from Earth. Pick a mission patch sticker and I’ll tuck your transmission into my orbital memory.
+        </p>
+
+        <div class="guestbook-layout">
+          <!-- Signature Form -->
+          <form id="guestbook-form" class="guestbook-form-card">
+            <div class="form-group">
+              <label for="guest-name" class="form-label">My little space friend’s name</label>
+              <input type="text" id="guest-name" class="form-input" placeholder="e.g. Ground Control Voyager" required maxlength="30" />
+            </div>
+
+            <div class="form-group">
+              <label for="guest-msg" class="form-label">Your space transmission to me</label>
+              <textarea id="guest-msg" class="form-textarea" rows="3" placeholder="Send warm signals to Nova..." required maxlength="140"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Select Mission Patch Sticker</label>
+              <div class="sticker-picker" id="sticker-picker" role="radiogroup">
+                <button type="button" class="sticker-opt is-selected" data-sticker="🚀" aria-label="Rocket sticker">🚀</button>
+                <button type="button" class="sticker-opt" data-sticker="🪐" aria-label="Planet sticker">🪐</button>
+                <button type="button" class="sticker-opt" data-sticker="👨‍🚀" aria-label="Astronaut sticker">👨‍🚀</button>
+                <button type="button" class="sticker-opt" data-sticker="⭐" aria-label="Star sticker">⭐</button>
+                <button type="button" class="sticker-opt" data-sticker="🛸" aria-label="UFO sticker">🛸</button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-pill btn-primary" style="width: 100%; justify-content: center;">
+              Send me your message ✨
+            </button>
+          </form>
+
+          <!-- Guestbook Cards Feed -->
+          <div class="guestbook-wall" id="guestbook-wall" role="feed" aria-label="Space visitor transmissions">
+            <!-- Dynamically populated via guestbook.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer with Vintage Mission Odometer Hit Counter (+1 pt) -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#hero" class="nav-brand">
+            <div class="nav-brand-logo" aria-hidden="true">🚀</div>
+            <span>Nova</span>
+          </a>
+          <p class="footer-copy" style="margin-top: 8px;">
+            I built this tiny station from starlight, star maps, and a whole lot of giggles.
+          </p>
+        </div>
+
+        <!-- Vintage Space Odometer -->
+        <div class="odometer-wrapper" aria-label="Total space travelers logged">
+          <span class="odometer-label">SPACE TRAVELERS:</span>
+          <div class="odometer-display" id="odometer-display">
+            <!-- Dynamically rendered rolling digits -->
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 20px;">
+        <span class="footer-copy">© 2026 Nova · Orbital Nursery Division</span>
+        <span class="footer-copy">I make good things start in zero-g. ✦</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Easter Egg Modal Dialog (Unlocked via Secret Trigger) -->
+  <div id="easter-egg-modal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="easter-egg-certificate">
+      <div class="certificate-seal">🚀</div>
+      <h3 id="modal-title" class="certificate-title">Cosmic Cosmonaut License</h3>
+      <p style="font-size: 1.05rem; margin-bottom: 20px; line-height: 1.6;">
+        I found my secret rocket flight computer! For your eagle-eyed curiosity across the galaxy, I officially certify you as an <strong>Honorary Intergalactic Flight Commander (Tier 3)</strong>.
+      </p>
+      <div class="character-bio-strip" style="margin-bottom: 24px; text-align: center;">
+        <div class="bio-stat">
+          <small>Awarded To</small>
+          <strong>Curious Cadet</strong>
+        </div>
+        <div class="bio-stat">
+          <small>Clearance</small>
+          <strong>Tier 3 Legend</strong>
+        </div>
+        <div class="bio-stat">
+          <small>Ship Class</small>
+          <strong>Apollo Stardust</strong>
+        </div>
+      </div>
+      <button id="close-modal-btn" class="btn-pill btn-primary" type="button">
+        Roger That, Ground Control ✦
+      </button>
+    </div>
+  </div>
+
+  <!-- Master Script Module -->
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
