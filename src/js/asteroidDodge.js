@@ -1,4 +1,5 @@
 import { initSpaceBackground } from './spaceBackground.js';
+import { awardBadge } from './achievements.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initSpaceBackground();
@@ -323,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem(bestKey, String(bestScore));
       bestValue.textContent = formatScore(bestScore);
       launchBest.textContent = formatScore(bestScore);
+      awardBadge('dodge');
     }
     pauseButton.disabled = true;
     setOverlay('Mission complete', 'I got bonked!', `I scored ${formatScore(finalScore)} points. Those rocks were extremely impolite.`, 'Fly again', startGame);

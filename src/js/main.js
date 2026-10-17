@@ -14,8 +14,66 @@ import { initGuestbook } from './guestbook.js';
 import { initHitCounter } from './odometer.js';
 import { initChaosMode } from './chaosMode.js';
 import { initEasterEgg } from './easterEgg.js';
+import { initMilkRoutes } from './milkRoutes.js';
+import { renderBadges } from './achievements.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const root = document.documentElement;
+  const bedtimeButton = document.getElementById('bedtime-toggle-btn');
+  const bedtimeCompanion = document.getElementById('bedtime-companion');
+  const bedtimeNova = document.getElementById('bedtime-mini-nova');
+  let bedtimeStartedLullaby = false;
+
+  function applyLocalSky() {
+    const hour = new Date().getHours();
+    root.dataset.skyTime = hour >= 7 && hour < 19 ? 'day' : 'night';
+  }
+
+  applyLocalSky();
+  window.setInterval(applyLocalSky, 60 * 60 * 1000);
+
+  if (bedtimeButton) {
+    bedtimeButton.addEventListener('click', () => {
+      const isBedtime = !root.classList.contains('bedtime-mode');
+      root.classList.toggle('bedtime-mode', isBedtime);
+      bedtimeButton.setAttribute('aria-pressed', String(isBedtime));
+      bedtimeButton.innerHTML = isBedtime ? '☀️ <span class="btn-text">Wake Nova</span>' : '🌙 <span class="btn-text">Bedtime</span>';
+      if (bedtimeCompanion) bedtimeCompanion.hidden = !isBedtime;
+      if (isBedtime && bedtimeNova && !bedtimeNova.firstChild) {
+        const avatar = document.querySelector('.astro-character-svg')?.cloneNode(true);
+        if (avatar) {
+          const ids = new Map();
+          avatar.querySelectorAll('[id]').forEach((node) => {
+            const originalId = node.id;
+            node.id = `bedtime-${originalId}`;
+            ids.set(originalId, node.id);
+          });
+          avatar.querySelectorAll('*').forEach((node) => {
+            ['fill', 'stroke', 'filter', 'clip-path', 'mask'].forEach((attribute) => {
+              const value = node.getAttribute(attribute);
+              if (!value) return;
+              ids.forEach((newId, oldId) => {
+                node.setAttribute(attribute, value.replaceAll(`url(#${oldId})`, `url(#${newId})`));
+              });
+            });
+          });
+          avatar.setAttribute('aria-hidden', 'true');
+          avatar.removeAttribute('role');
+          avatar.classList.add('bedtime-mini-avatar-art');
+          bedtimeNova.append(avatar);
+        }
+      }
+
+      if (isBedtime && !sounds.lullabyPlaying) {
+        bedtimeStartedLullaby = sounds.toggleLullaby();
+      } else if (!isBedtime && bedtimeStartedLullaby && sounds.lullabyPlaying) {
+        sounds.toggleLullaby();
+        bedtimeStartedLullaby = false;
+      }
+      updateSoundBtnUI(sounds.isMuted);
+    });
+  }
+
   // 1. Launch Interactive Deep Space Animated Starfield
   initSpaceBackground();
 
@@ -100,9 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initEyeTracker();        // Interactive eye-tracking, visor glare, & zero-g avatar
   initConstellationLoom(); // Tier 3 interactive stellar navigation canvas
   initAuroraJar();         // Interactive Nebula Capsule Laboratory
+  initMilkRoutes();        // Moving satellites and live route statistics
   initStoryScroll();       // Interactive 4-scene bedtime astronaut origin scroll
   initGuestbook();         // +2 pts Live space logbook wall
   initHitCounter();        // +1 pt Vintage mission odometer ticker
   initChaosMode();         // +5 pts Responsive Retro 90s Space Chaos Mode
   initEasterEgg();         // Hidden Easter egg & Cosmic Flight License
+  renderBadges();
 });

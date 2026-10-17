@@ -9,6 +9,7 @@
  */
 
 import { sounds } from './audio.js';
+import { awardBadge } from './achievements.js';
 
 export function initEyeTracker() {
   const avatarWrapper = document.getElementById('loomi-interactive-avatar');
@@ -170,6 +171,7 @@ export function initEyeTracker() {
 
   avatarWrapper.addEventListener('click', (e) => {
     if (isSpeaking) return;
+    awardBadge('giggle');
     isSpeaking = true;
 
     // 1. Play cute radio chirp & baby giggle intro
