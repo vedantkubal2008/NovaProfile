@@ -359,12 +359,7 @@
                     <option value="twilight">Comet Teal</option>
                   </select>
                   <button id="mix-samples-btn" class="btn-pill" type="button">Blend chord</button>
-                </div>
-                <div class="melody-controls">
-                  <button id="nebula-record-btn" class="btn-pill" type="button" aria-pressed="false">Record melody</button>
-                  <button id="nebula-play-btn" class="btn-pill" type="button" disabled>Play melody</button>
-                  <button id="nebula-clear-btn" class="btn-pill" type="button">Clear</button>
-                  <span id="nebula-melody-status" class="control-status" aria-live="polite">0 notes</span>
+                  <span id="nebula-mix-status" class="control-status" aria-live="polite"></span>
                 </div>
               </div>
             </div>
@@ -377,7 +372,7 @@
           </article>
 
           <!-- Project 3: Interstellar Milk-Route Airpaths (Interactive Flight Map) -->
-          <article class="project-card-half" aria-labelledby="map-title">
+          <article class="project-card-half milk-route-card" aria-labelledby="map-title">
             <div>
               <span class="card-tag">Project 03 · My sleepy delivery routes</span>
               <h3 id="map-title" class="card-title">My Interstellar Milk-Routes</h3>
@@ -385,7 +380,7 @@
                 I fly warm star-milk and dream cassettes through zero-gravity lanes to sleepy satellites and lunar nurseries all across the night sky.
               </p>
 
-              <div class="character-bio-strip" style="margin-bottom: 20px;">
+              <div class="character-bio-strip route-stats">
                 <div class="bio-stat">
                   <small>Active Orbits</small>
                   <strong><span id="orbit-count">48</span> Satellites</strong>

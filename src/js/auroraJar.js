@@ -48,10 +48,6 @@ export function initAuroraJar() {
 
   let currentPreset = presets.lavender;
   let particles = [];
-  let recording = false;
-  let playingMelody = false;
-  let melodyTimer = null;
-  const melody = [];
   const sampledEssences = new Set();
   const particleCount = 28;
 
@@ -87,11 +83,6 @@ export function initAuroraJar() {
         if (sampledEssences.size === Object.keys(presets).length) awardBadge('nebula');
         sounds.playChime(currentPreset.note, 0.2);
 
-        if (recording && melody.length < 12) {
-          melody.push(type);
-          updateMelodyStatus();
-        }
-
         // Update CSS glow variable for parent card
         const card = document.getElementById('aurora-showcase-card');
         if (card) {
@@ -104,10 +95,7 @@ export function initAuroraJar() {
   const firstSample = document.getElementById('mix-first');
   const secondSample = document.getElementById('mix-second');
   const mixButton = document.getElementById('mix-samples-btn');
-  const recordButton = document.getElementById('nebula-record-btn');
-  const playButton = document.getElementById('nebula-play-btn');
-  const clearButton = document.getElementById('nebula-clear-btn');
-  const melodyStatus = document.getElementById('nebula-melody-status');
+  const mixStatus = document.getElementById('nebula-mix-status');
 
   function blendHex(first, second, amount = 0.5) {
     const parse = (hex) => hex.match(/[\da-f]{2}/gi).map((value) => parseInt(value, 16));
@@ -119,11 +107,6 @@ export function initAuroraJar() {
   function asRgba(hex, alpha) {
     const [red, green, blue] = hex.match(/[\da-f]{2}/gi).map((value) => parseInt(value, 16));
     return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
-  }
-
-  function updateMelodyStatus() {
-    if (melodyStatus) melodyStatus.textContent = `${melody.length} notes${recording ? ' · recording' : ''}`;
-    if (playButton) playButton.disabled = melody.length < 2 || playingMelody;
   }
 
   if (mixButton && firstSample && secondSample) {
@@ -144,53 +127,7 @@ export function initAuroraJar() {
       if (card) card.style.setProperty('--jar-glow', mixed);
       sounds.playChime(first.note, 0.12);
       window.setTimeout(() => sounds.playChime(second.note, 0.12), 90);
-      if (melodyStatus) melodyStatus.textContent = `Blend · ${firstSample.selectedOptions[0].text} + ${secondSample.selectedOptions[0].text}`;
-    });
-  }
-
-  if (recordButton) {
-    recordButton.addEventListener('click', () => {
-      recording = !recording;
-      if (recording) melody.length = 0;
-      recordButton.setAttribute('aria-pressed', String(recording));
-      recordButton.textContent = recording ? 'Stop recording' : 'Record melody';
-      updateMelodyStatus();
-    });
-  }
-
-  if (playButton) {
-    playButton.addEventListener('click', () => {
-      if (melody.length < 2 || playingMelody) return;
-      playingMelody = true;
-      updateMelodyStatus();
-      let index = 0;
-      const playNext = () => {
-        const preset = presets[melody[index]];
-        if (!preset) return;
-        sounds.playChime(preset.note, 0.16);
-        index += 1;
-        if (index < melody.length) {
-          melodyTimer = window.setTimeout(playNext, 360);
-        } else {
-          playingMelody = false;
-          updateMelodyStatus();
-        }
-      };
-      playNext();
-    });
-  }
-
-  if (clearButton) {
-    clearButton.addEventListener('click', () => {
-      window.clearTimeout(melodyTimer);
-      melody.length = 0;
-      playingMelody = false;
-      recording = false;
-      if (recordButton) {
-        recordButton.setAttribute('aria-pressed', 'false');
-        recordButton.textContent = 'Record melody';
-      }
-      updateMelodyStatus();
+      if (mixStatus) mixStatus.textContent = `Blended ${firstSample.selectedOptions[0].text} + ${secondSample.selectedOptions[0].text}`;
     });
   }
 

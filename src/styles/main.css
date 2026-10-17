@@ -906,6 +906,44 @@ h1, h2, h3, .serif {
   box-shadow: var(--shadow-float);
 }
 
+.milk-route-card {
+  align-self: start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 1fr);
+  align-items: center;
+  gap: 18px;
+  height: max-content;
+}
+
+.milk-route-card .card-desc {
+  margin-bottom: 14px;
+}
+
+.route-stats {
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 0 !important;
+  padding: 12px 14px;
+}
+
+.route-stats .bio-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.route-stats .bio-stat strong {
+  text-align: right;
+}
+
+.milk-route-card .map-stage {
+  height: 250px;
+  min-height: 220px;
+  max-height: 250px;
+  margin: 0;
+}
+
 .card-tag {
   display: inline-block;
   font-size: 0.75rem;
@@ -1611,6 +1649,27 @@ h1, h2, h3, .serif {
 }
 
 @media (max-width: 600px) {
+  .milk-route-card {
+    grid-template-columns: 1fr;
+  }
+
+  .route-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .route-stats .bio-stat {
+    display: block;
+    min-width: 0;
+  }
+
+  .route-stats .bio-stat strong {
+    text-align: left;
+  }
+
+  .milk-route-card .map-stage {
+    min-height: 170px;
+  }
+
   .nav-inner {
     flex-wrap: wrap;
   }
