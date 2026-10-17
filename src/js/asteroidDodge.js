@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadNova() {
     try {
-      const response = await fetch('/index.html');
+      const response = await fetch('./index.html');
       if (!response.ok) throw new Error('Homepage artwork unavailable');
       const markup = await response.text();
       const homeDocument = new DOMParser().parseFromString(markup, 'text/html');
