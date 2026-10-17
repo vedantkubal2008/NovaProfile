@@ -12,7 +12,7 @@ import { initAuroraJar } from './auroraJar.js';
 import { initStoryScroll } from './storyScroll.js';
 import { initGuestbook } from './guestbook.js';
 import { initHitCounter } from './odometer.js';
-import { initChaosMode } from './chaosMode.js';
+import { initChaosMode } from './chaosMode.js?v=0182b7d';
 import { initEasterEgg } from './easterEgg.js';
 import { initMilkRoutes } from './milkRoutes.js';
 import { renderBadges } from './achievements.js';
