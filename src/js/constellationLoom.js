@@ -5,6 +5,7 @@
  */
 
 import { sounds } from './audio.js';
+import { awardBadge } from './achievements.js';
 
 export function initConstellationLoom() {
   const canvas = document.getElementById('loom-canvas');
@@ -25,6 +26,8 @@ export function initConstellationLoom() {
   // Star nodes
   let stars = [];
   let lines = []; // connected pairs [ {from: starIndex, to: starIndex} ]
+  let userLines = [];
+  let secretTriangleFound = false;
   let draggingFrom = null;
   let mousePos = { x: 0, y: 0 };
   let isDragging = false;
@@ -53,6 +56,94 @@ export function initConstellationLoom() {
   }
 
   initStars();
+
+  function routeSnapshot(name = '') {
+    return {
+      name,
+      stars: stars.map((star) => ({
+        x: star.x / width,
+        y: star.y / height,
+        baseRadius: star.baseRadius,
+        pulseOffset: star.pulseOffset,
+        noteIndex: star.noteIndex
+      })),
+      lines: lines.map((line) => ({ ...line }))
+    };
+  }
+
+  function applyRoute(route) {
+    if (!Array.isArray(route?.stars) || route.stars.length !== starCount || !Array.isArray(route.lines)) return false;
+    stars = route.stars.map((star, id) => ({
+      id,
+      x: Math.max(0, Math.min(1, Number(star.x))) * width,
+      y: Math.max(0, Math.min(1, Number(star.y))) * height,
+      baseRadius: Number(star.baseRadius) || 5,
+      pulseOffset: Number(star.pulseOffset) || 0,
+      name: `Star ${id + 1}`,
+      noteIndex: Number(star.noteIndex) || id % 8
+    }));
+    lines = route.lines.filter((line) => Number.isInteger(line.from) && Number.isInteger(line.to) && line.from < starCount && line.to < starCount);
+    userLines = [];
+    return true;
+  }
+
+  function formsTriangle(edges) {
+    const adjacent = new Map();
+    edges.forEach(({ from, to }) => {
+      if (!adjacent.has(from)) adjacent.set(from, new Set());
+      if (!adjacent.has(to)) adjacent.set(to, new Set());
+      adjacent.get(from).add(to);
+      adjacent.get(to).add(from);
+    });
+    for (const [first, neighbors] of adjacent) {
+      for (const second of neighbors) {
+        for (const third of adjacent.get(second) || []) {
+          if (third !== first && adjacent.get(third)?.has(first)) return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  const routeNameInput = document.getElementById('loom-route-name');
+  const savedRoutes = document.getElementById('loom-saved-routes');
+  const feedback = document.getElementById('loom-feedback');
+
+  function readSavedRoutes() {
+    try {
+      const routes = JSON.parse(localStorage.getItem('nova-saved-routes') || '[]');
+      return Array.isArray(routes) ? routes : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function renderSavedRoutes() {
+    if (!savedRoutes) return;
+    savedRoutes.replaceChildren();
+    readSavedRoutes().forEach((route) => {
+      const button = document.createElement('button');
+      button.className = 'saved-route-btn';
+      button.type = 'button';
+      button.textContent = route.name;
+      button.addEventListener('click', () => {
+        if (applyRoute(route)) {
+          if (routeNameInput) routeNameInput.value = route.name;
+          if (feedback) feedback.textContent = `Loaded ${route.name}`;
+        }
+      });
+      savedRoutes.append(button);
+    });
+  }
+
+  try {
+    const sharedRoute = new URLSearchParams(window.location.search).get('route');
+    if (sharedRoute) {
+      const route = JSON.parse(sharedRoute);
+      if (applyRoute(route) && routeNameInput) routeNameInput.value = String(route.name || '').slice(0, 32);
+    }
+  } catch {}
+  renderSavedRoutes();
 
   // Pointer interactions
   function getNearestStar(x, y, maxDist = 28) {
@@ -114,12 +205,18 @@ export function initConstellationLoom() {
 
       if (!exists) {
         lines.push({ from: draggingFrom.id, to: targetStar.id });
+        userLines.push({ from: draggingFrom.id, to: targetStar.id });
         sounds.playHarp(targetStar.noteIndex);
         sounds.playTwinkle();
 
-        // Check milestone constellation
-        const feedback = document.getElementById('loom-feedback');
-        if (feedback) {
+        if (!secretTriangleFound && formsTriangle(userLines)) {
+          secretTriangleFound = true;
+          awardBadge('secret');
+          window.dispatchEvent(new CustomEvent('nova:secret-discovered'));
+          if (feedback) feedback.textContent = 'Hidden constellation found · Secret Starfinder badge earned';
+        }
+
+        if (feedback && !secretTriangleFound) {
           const names = [
             '🚀 Woven: Apollo Orbital Rocket!',
             '🪐 Woven: Saturn\'s Glowing Rings!',
@@ -141,7 +238,8 @@ export function initConstellationLoom() {
     clearBtn.addEventListener('click', () => {
       sounds.playPop();
       lines = [];
-      const feedback = document.getElementById('loom-feedback');
+      userLines = [];
+      secretTriangleFound = false;
       if (feedback) feedback.innerText = 'Drag between stars to weave your own constellation!';
     });
   }
@@ -151,8 +249,68 @@ export function initConstellationLoom() {
     shuffleBtn.addEventListener('click', () => {
       sounds.playTwinkle();
       initStars();
-      const feedback = document.getElementById('loom-feedback');
+      userLines = [];
+      secretTriangleFound = false;
       if (feedback) feedback.innerText = '✨ Sky rearranged with fresh starlight nodes!';
+    });
+  }
+
+  const saveButton = document.getElementById('loom-save-btn');
+  if (saveButton) {
+    saveButton.addEventListener('click', () => {
+      const routes = readSavedRoutes();
+      const name = (routeNameInput?.value || '').trim().slice(0, 32) || `Star route ${routes.length + 1}`;
+      const route = routeSnapshot(name);
+      const saved = [route, ...routes.filter((entry) => entry.name !== name)].slice(0, 8);
+      try {
+        localStorage.setItem('nova-saved-routes', JSON.stringify(saved));
+        renderSavedRoutes();
+        awardBadge('route');
+        if (feedback) feedback.textContent = `${name} saved`;
+      } catch {
+        if (feedback) feedback.textContent = 'This browser could not save the route';
+      }
+    });
+  }
+
+  const shareButton = document.getElementById('loom-share-btn');
+  const shareOutput = document.getElementById('loom-share-url');
+  if (shareButton) {
+    shareButton.addEventListener('click', () => {
+      const route = routeSnapshot((routeNameInput?.value || '').trim());
+      const url = new URL(window.location.href);
+      url.searchParams.set('route', JSON.stringify(route));
+      if (shareOutput) {
+        shareOutput.value = url.toString();
+        shareOutput.hidden = false;
+        shareOutput.focus();
+        shareOutput.select();
+      }
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(url.toString())
+          .then(() => { if (feedback) feedback.textContent = 'Route link copied'; })
+          .catch(() => { if (feedback) feedback.textContent = 'Route link ready to copy'; });
+      } else if (feedback) {
+        feedback.textContent = 'Route link ready to copy';
+      }
+    });
+  }
+
+  const imageButton = document.getElementById('loom-image-btn');
+  if (imageButton) {
+    imageButton.addEventListener('click', () => {
+      const fileName = (routeNameInput?.value || 'nova-star-route').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'nova-star-route';
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const download = document.createElement('a');
+        const imageUrl = URL.createObjectURL(blob);
+        download.href = imageUrl;
+        download.download = `${fileName}.png`;
+        document.body.append(download);
+        download.click();
+        download.remove();
+        window.setTimeout(() => URL.revokeObjectURL(imageUrl), 1000);
+      }, 'image/png');
     });
   }
 

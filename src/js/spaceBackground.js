@@ -97,7 +97,8 @@ export function initSpaceBackground() {
 
   // Periodic random shooting stars (every 4-7 seconds)
   setInterval(() => {
-    if (Math.random() > 0.3) {
+    const bedtime = document.documentElement.classList.contains('bedtime-mode');
+    if (Math.random() > (bedtime ? 0.92 : 0.3)) {
       spawnShootingStar();
     }
   }, 4500);
@@ -105,7 +106,9 @@ export function initSpaceBackground() {
   // Animation Loop
   let frame = 0;
   function animate() {
-    frame++;
+    const bedtime = document.documentElement.classList.contains('bedtime-mode');
+    const motionScale = bedtime ? 0.3 : 1;
+    frame += motionScale;
     ctx.clearRect(0, 0, width, height);
 
     // Smooth cursor follow for gentle parallax
@@ -146,9 +149,9 @@ export function initSpaceBackground() {
     // Render shooting stars
     for (let i = shootingStars.length - 1; i >= 0; i--) {
       const ss = shootingStars[i];
-      ss.x += ss.vx;
-      ss.y += ss.vy;
-      ss.alpha -= 0.016;
+      ss.x += ss.vx * motionScale;
+      ss.y += ss.vy * motionScale;
+      ss.alpha -= 0.016 * motionScale;
 
       if (ss.alpha <= 0 || ss.x > width || ss.y > height) {
         shootingStars.splice(i, 1);

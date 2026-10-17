@@ -5,6 +5,7 @@
  */
 
 import { sounds } from './audio.js';
+import { awardBadge } from './achievements.js';
 
 export function initAuroraJar() {
   const canvas = document.getElementById('aurora-canvas');
@@ -47,6 +48,7 @@ export function initAuroraJar() {
 
   let currentPreset = presets.lavender;
   let particles = [];
+  const sampledEssences = new Set();
   const particleCount = 28;
 
   function initParticles() {
@@ -77,6 +79,8 @@ export function initAuroraJar() {
       const type = btn.getAttribute('data-essence');
       if (presets[type]) {
         currentPreset = presets[type];
+        sampledEssences.add(type);
+        if (sampledEssences.size === Object.keys(presets).length) awardBadge('nebula');
         sounds.playChime(currentPreset.note, 0.2);
 
         // Update CSS glow variable for parent card
@@ -88,14 +92,54 @@ export function initAuroraJar() {
     });
   });
 
+  const firstSample = document.getElementById('mix-first');
+  const secondSample = document.getElementById('mix-second');
+  const mixButton = document.getElementById('mix-samples-btn');
+  const mixStatus = document.getElementById('nebula-mix-status');
+
+  function blendHex(first, second, amount = 0.5) {
+    const parse = (hex) => hex.match(/[\da-f]{2}/gi).map((value) => parseInt(value, 16));
+    const a = parse(first);
+    const b = parse(second);
+    return `#${a.map((value, index) => Math.round(value + (b[index] - value) * amount).toString(16).padStart(2, '0')).join('')}`;
+  }
+
+  function asRgba(hex, alpha) {
+    const [red, green, blue] = hex.match(/[\da-f]{2}/gi).map((value) => parseInt(value, 16));
+    return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+  }
+
+  if (mixButton && firstSample && secondSample) {
+    mixButton.addEventListener('click', () => {
+      const first = presets[firstSample.value];
+      const second = presets[secondSample.value];
+      if (!first || !second) return;
+
+      const mixed = blendHex(first.glow, second.glow);
+      currentPreset = {
+        c1: asRgba(blendHex(first.glow, second.glow, 0.32), 0.88),
+        c2: asRgba(mixed, 0.72),
+        c3: asRgba(blendHex(first.glow, second.glow, 0.68), 0.88),
+        glow: mixed,
+        note: Math.sqrt(first.note * second.note)
+      };
+      const card = document.getElementById('aurora-showcase-card');
+      if (card) card.style.setProperty('--jar-glow', mixed);
+      sounds.playChime(first.note, 0.12);
+      window.setTimeout(() => sounds.playChime(second.note, 0.12), 90);
+      if (mixStatus) mixStatus.textContent = `Blended ${firstSample.selectedOptions[0].text} + ${secondSample.selectedOptions[0].text}`;
+    });
+  }
+
   // Render loop
   function render() {
+    const motionScale = document.documentElement.classList.contains('bedtime-mode') ? 0.3 : 1;
     ctx.clearRect(0, 0, width, height);
 
     // Render jar inner glow
     particles.forEach((p) => {
-      p.x += p.vx;
-      p.y += p.vy;
+      p.x += p.vx * motionScale;
+      p.y += p.vy * motionScale;
 
       // Wrap around within jar bounds
       if (p.y < 30) p.y = height - 40;

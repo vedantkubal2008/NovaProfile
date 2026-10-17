@@ -48,6 +48,15 @@
   --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+:root[data-sky-time="day"]:not([data-theme="lunar"]) {
+  --bg-cosmos: #0a2029;
+  --bg-space-gradient: radial-gradient(ellipse at 28% 0%, #285363 0%, #0b2833 52%, #06121d 100%);
+  --bg-card: rgba(17, 43, 56, 0.9);
+  --bg-card-subtle: rgba(24, 58, 72, 0.82);
+  --accent-gold: #f3c65f;
+  --accent-starlight: #79dff0;
+}
+
 /* Lunar Station polar-light mode */
 [data-theme="lunar"] {
   --bg-cosmos: #eaf5f7;

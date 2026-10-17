@@ -5,6 +5,7 @@
  */
 
 import { sounds } from './audio.js';
+import { awardBadge } from './achievements.js';
 
 export function initGuestbook() {
   const form = document.getElementById('guestbook-form');
@@ -104,6 +105,7 @@ export function initGuestbook() {
 
     const name = nameInput.value.trim() || 'A Curious Traveler';
     const message = msgInput.value.trim() || 'Left a warm pocket of starlight in your guestbook!';
+    awardBadge('guestbook');
 
     let entries = [];
     try {

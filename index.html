@@ -37,29 +37,42 @@
         <span>Nova</span>
       </a>
 
-      <nav class="nav-links" aria-label="Primary Navigation">
+      <button id="nav-menu-toggle" class="nav-menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation" title="Open navigation">
+        <span aria-hidden="true">☰</span><span class="nav-menu-label">Menu</span>
+      </button>
+
+      <nav id="primary-nav" class="nav-links" aria-label="Primary Navigation">
         <a href="#about" class="nav-link">My Mission</a>
         <a href="#showcase" class="nav-link">My Inventions</a>
         <a href="#story" class="nav-link">My Bedtime Story</a>
         <a href="#guestbook" class="nav-link">My Mission Log</a>
-        <a href="./game.html" class="nav-link">Dodge Game</a>
-        <a href="./gallery.html" class="nav-link">Nova Gallery</a>
-        <a href="./chat.html" class="nav-link" style="color: #ffd166; font-weight: 700;">Talk to Me 💬</a>
+        <details class="nav-more">
+          <summary class="nav-link">Explore</summary>
+          <div class="nav-more-menu">
+            <a href="./game.html" class="nav-link">Dodge Game</a>
+            <a href="./gallery.html" class="nav-link">Nova Gallery</a>
+            <a href="./chat.html" class="nav-link">Talk to Me 💬</a>
+          </div>
+        </details>
       </nav>
 
       <div class="nav-actions">
         <!-- Bonus Quest: Click Sounds & Accessible Mute Switch (+3 pts) -->
-        <button id="sound-toggle-btn" class="btn-pill" type="button" aria-pressed="false" aria-label="Radio Muted. Click to enable space audio">
+        <button id="sound-toggle-btn" class="btn-pill" type="button" aria-pressed="false" aria-label="Radio Muted. Click to enable space audio" title="Toggle space audio">
           🔇 <span class="btn-text">Unmute</span>
         </button>
 
         <!-- Theme Toggle: Deep Cosmos <-> Lunar Station -->
-        <button id="theme-toggle-btn" class="btn-pill" type="button" aria-label="Toggle Lunar Theme">
+        <button id="theme-toggle-btn" class="btn-pill" type="button" aria-label="Toggle Lunar Theme" title="Toggle Lunar theme">
           🌕 <span class="btn-text">Lunar Station</span>
         </button>
 
+        <button id="bedtime-toggle-btn" class="btn-pill" type="button" aria-label="Toggle bedtime mode" title="Toggle bedtime mode" aria-pressed="false">
+          🌙 <span class="btn-text">Bedtime</span>
+        </button>
+
         <!-- Bonus Quest: Responsive Chaos Mode (+5 pts) -->
-        <button id="chaos-toggle-btn" class="btn-pill" type="button" aria-pressed="false" aria-label="Toggle Retro Space Chaos Mode">
+        <button id="chaos-toggle-btn" class="btn-pill" type="button" aria-pressed="false" aria-label="Toggle Retro Space Chaos Mode" title="Toggle Chaos Mode">
           🌀 <span class="btn-text">Chaos Mode</span>
         </button>
       </div>
@@ -296,6 +309,15 @@
                 </span>
               </div>
             </div>
+            <div class="loom-save-panel" aria-label="Saved star routes">
+              <label class="sr-only" for="loom-route-name">Route name</label>
+              <input id="loom-route-name" class="form-input" type="text" maxlength="32" placeholder="Name this route" />
+              <button id="loom-save-btn" class="btn-pill" type="button">Save route</button>
+              <button id="loom-image-btn" class="btn-pill" type="button">Download image</button>
+              <button id="loom-share-btn" class="btn-pill" type="button">Share link</button>
+              <input id="loom-share-url" class="form-input loom-share-url" type="url" readonly hidden aria-label="Shareable star route link" />
+              <div id="loom-saved-routes" class="loom-saved-routes" aria-live="polite"></div>
+            </div>
           </article>
 
           <!-- Project 2: Nebula Capsule Laboratory (Interactive Shader & Particle Jars) -->
@@ -321,6 +343,25 @@
                   🌊 Comet Teal (523Hz)
                 </button>
               </div>
+              <div class="nebula-mixer" aria-label="Nebula sample mixer">
+                <label class="mix-select-label" for="mix-first">Mix samples</label>
+                <div class="mix-control-row">
+                  <select id="mix-first" class="form-input" aria-label="First sample">
+                    <option value="lavender">Aurora Bloom</option>
+                    <option value="solargold">Solar Flare Amber</option>
+                    <option value="glacier">Andromeda Mist</option>
+                    <option value="twilight">Comet Teal</option>
+                  </select>
+                  <select id="mix-second" class="form-input" aria-label="Second sample">
+                    <option value="solargold">Solar Flare Amber</option>
+                    <option value="lavender">Aurora Bloom</option>
+                    <option value="glacier">Andromeda Mist</option>
+                    <option value="twilight">Comet Teal</option>
+                  </select>
+                  <button id="mix-samples-btn" class="btn-pill" type="button">Blend chord</button>
+                  <span id="nebula-mix-status" class="control-status" aria-live="polite"></span>
+                </div>
+              </div>
             </div>
 
             <div class="aurora-stage">
@@ -331,7 +372,7 @@
           </article>
 
           <!-- Project 3: Interstellar Milk-Route Airpaths (Interactive Flight Map) -->
-          <article class="project-card-half" aria-labelledby="map-title">
+          <article class="project-card-half milk-route-card" aria-labelledby="map-title">
             <div>
               <span class="card-tag">Project 03 · My sleepy delivery routes</span>
               <h3 id="map-title" class="card-title">My Interstellar Milk-Routes</h3>
@@ -339,10 +380,10 @@
                 I fly warm star-milk and dream cassettes through zero-gravity lanes to sleepy satellites and lunar nurseries all across the night sky.
               </p>
 
-              <div class="character-bio-strip" style="margin-bottom: 20px;">
+              <div class="character-bio-strip route-stats">
                 <div class="bio-stat">
                   <small>Active Orbits</small>
-                  <strong>48 Satellites</strong>
+                  <strong><span id="orbit-count">48</span> Satellites</strong>
                 </div>
                 <div class="bio-stat">
                   <small>Zero-G Drift</small>
@@ -350,7 +391,7 @@
                 </div>
                 <div class="bio-stat">
                   <small>Dreams Logged</small>
-                  <strong>11.4k Units</strong>
+                  <strong><span id="dream-count">11.4k</span> Units</strong>
                 </div>
               </div>
             </div>
@@ -358,7 +399,10 @@
             <div class="map-stage" role="img" aria-label="Interactive orbital flight map showing space stations">
               <svg class="map-svg" viewBox="0 0 320 160">
                 <!-- Orbital Flight Path -->
-                <path d="M 20 130 Q 90 20 160 90 T 300 40" fill="none" stroke="#ffd166" stroke-width="2.5" stroke-dasharray="6,6" />
+                <path id="milk-route-path" d="M 20 130 Q 90 20 160 90 T 300 40" fill="none" stroke="#ffd166" stroke-width="2.5" stroke-dasharray="6,6" />
+                <g class="route-satellite" data-phase="0" data-speed="0.000018" aria-hidden="true"><circle r="4" fill="#ffffff" /><circle r="7" fill="none" stroke="#65dcf2" stroke-opacity=".7" /></g>
+                <g class="route-satellite" data-phase="0.34" data-speed="0.000014" aria-hidden="true"><circle r="3.5" fill="#ffd166" /><circle r="6.5" fill="none" stroke="#ffd166" stroke-opacity=".65" /></g>
+                <g class="route-satellite" data-phase="0.68" data-speed="0.000016" aria-hidden="true"><circle r="3.5" fill="#ff8066" /><circle r="6.5" fill="none" stroke="#ff8066" stroke-opacity=".65" /></g>
                 
                 <!-- Waypoints -->
                 <g class="map-checkpoint" transform="translate(20, 130)">
@@ -405,6 +449,10 @@
             <button class="story-dot" aria-label="Go to Chapter 4"></button>
           </div>
           <p id="story-active-chapter" class="card-tag" style="margin-top: 12px;">Scene 1: The Crib on Apollo-99</p>
+          <div class="story-read-controls">
+            <button id="story-read-toggle" class="btn-pill" type="button" aria-pressed="false">Read to me</button>
+            <span id="story-read-status" class="control-status" aria-live="polite"></span>
+          </div>
         </div>
 
         <div class="story-scenes-track">
@@ -502,6 +550,11 @@
     </section>
   </main>
 
+  <div id="bedtime-companion" class="bedtime-companion" hidden role="status" aria-live="polite">
+    <span id="bedtime-mini-nova" class="bedtime-cocoon" aria-hidden="true"></span>
+    <span>Nova is drifting into her cocoon</span>
+  </div>
+
   <!-- Footer with Vintage Mission Odometer Hit Counter (+1 pt) -->
   <footer class="footer" role="contentinfo">
     <div class="container">
@@ -522,6 +575,10 @@
           <div class="odometer-display" id="odometer-display">
             <!-- Dynamically rendered rolling digits -->
           </div>
+        </div>
+        <div class="best-dodge-stat" aria-label="Personal best asteroid dodge score">
+          <span class="odometer-label">BEST DODGE</span>
+          <strong id="best-dodge-score">0000</strong>
         </div>
       </div>
 
@@ -554,6 +611,11 @@
           <strong>Apollo Stardust</strong>
         </div>
       </div>
+      <div class="earned-badges" aria-live="polite">
+        <h4>Mission badges</h4>
+        <ul id="earned-badge-list"></ul>
+      </div>
+      <button id="download-license-btn" class="btn-pill" type="button">Download license PNG</button>
       <button id="close-modal-btn" class="btn-pill btn-primary" type="button">
         Roger That, Ground Control ✦
       </button>
