@@ -5,7 +5,7 @@
  * 2. Typing the secret Konami-style code "BABY"
  */
 
-import confetti from 'canvas-confetti';
+import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/+esm';
 import { sounds } from './audio.js';
 
 export function initEasterEgg() {
