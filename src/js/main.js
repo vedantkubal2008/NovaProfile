@@ -1,0 +1,108 @@
+/**
+ * Master Controller: Nova, The Pocket Cosmonaut
+ * Orchestrates all interactive toys, space sound synthesis, theme shifts, and side quests.
+ */
+
+import { sounds } from './audio.js';
+import { initSpaceBackground } from './spaceBackground.js';
+import { initSparkleTrail } from './sparkles.js';
+import { initEyeTracker } from './eyeTracker.js';
+import { initConstellationLoom } from './constellationLoom.js';
+import { initAuroraJar } from './auroraJar.js';
+import { initStoryScroll } from './storyScroll.js';
+import { initGuestbook } from './guestbook.js';
+import { initHitCounter } from './odometer.js';
+import { initChaosMode } from './chaosMode.js';
+import { initEasterEgg } from './easterEgg.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Launch Interactive Deep Space Animated Starfield
+  initSpaceBackground();
+
+  // 2. Initialize Audio Engine & Mute Button (+3 pts side quest)
+  const soundToggleBtn = document.getElementById('sound-toggle-btn');
+  if (soundToggleBtn) {
+    updateSoundBtnUI(sounds.isMuted);
+
+    soundToggleBtn.addEventListener('click', () => {
+      const isMuted = sounds.toggleMute();
+      updateSoundBtnUI(isMuted);
+    });
+  }
+
+  function updateSoundBtnUI(isMuted) {
+    if (!soundToggleBtn) return;
+    if (isMuted) {
+      soundToggleBtn.setAttribute('aria-label', 'Radio Muted. Click to enable space audio');
+      soundToggleBtn.setAttribute('aria-pressed', 'false');
+      soundToggleBtn.innerHTML = '🔇 <span class="btn-text">Unmute</span>';
+    } else {
+      soundToggleBtn.setAttribute('aria-label', 'Space Radio Active. Click to mute');
+      soundToggleBtn.setAttribute('aria-pressed', 'true');
+      soundToggleBtn.innerHTML = '📡 <span class="btn-text">Comms ON</span>';
+    }
+  }
+
+  // Bind pop sounds to all buttons and links
+  document.querySelectorAll('button, a.btn-pill, .interactive-click').forEach((el) => {
+    el.addEventListener('click', () => {
+      sounds.playPop();
+    });
+  });
+
+  // 3. Theme Toggle: Deep Cosmos <-> Lunar Base
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  if (themeToggleBtn) {
+    const savedTheme = localStorage.getItem('nova_theme') || 'cosmos';
+    if (savedTheme === 'lunar') {
+      document.documentElement.setAttribute('data-theme', 'lunar');
+      themeToggleBtn.innerHTML = '🌌 <span class="btn-text">Cosmos Mode</span>';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      sounds.playPop();
+      const current = document.documentElement.getAttribute('data-theme');
+      const nextTheme = current === 'lunar' ? 'cosmos' : 'lunar';
+      
+      if (nextTheme === 'lunar') {
+        document.documentElement.setAttribute('data-theme', 'lunar');
+        themeToggleBtn.innerHTML = '🌌 <span class="btn-text">Cosmos Mode</span>';
+        sounds.playChime(659.25);
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeToggleBtn.innerHTML = '🌕 <span class="btn-text">Lunar Station</span>';
+        sounds.playChime(880.00);
+      }
+      localStorage.setItem('nova_theme', nextTheme);
+    });
+  }
+
+  // 4. Ambient Space Lullaby Synthesizer
+  const lullabyBtn = document.getElementById('lullaby-toggle-btn');
+  if (lullabyBtn) {
+    lullabyBtn.addEventListener('click', () => {
+      sounds.playPop();
+      const isPlaying = sounds.toggleLullaby();
+      updateSoundBtnUI(sounds.isMuted);
+
+      if (isPlaying) {
+        lullabyBtn.classList.add('is-playing');
+        lullabyBtn.innerHTML = '⭐ Stop Nova\'s Lullaby';
+      } else {
+        lullabyBtn.classList.remove('is-playing');
+        lullabyBtn.innerHTML = '🎶 Play Nova\'s Fav Lullaby';
+      }
+    });
+  }
+
+  // 5. Initialize Interactive Toys & Side Quests
+  initSparkleTrail();      // +2 pts Sparkle cursor trail
+  initEyeTracker();        // Interactive eye-tracking, visor glare, & zero-g avatar
+  initConstellationLoom(); // Tier 3 interactive stellar navigation canvas
+  initAuroraJar();         // Interactive Nebula Capsule Laboratory
+  initStoryScroll();       // Interactive 4-scene bedtime astronaut origin scroll
+  initGuestbook();         // +2 pts Live space logbook wall
+  initHitCounter();        // +1 pt Vintage mission odometer ticker
+  initChaosMode();         // +5 pts Responsive Retro 90s Space Chaos Mode
+  initEasterEgg();         // Hidden Easter egg & Cosmic Flight License
+});

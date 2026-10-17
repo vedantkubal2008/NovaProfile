@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radio Chat with Cadet Nova | Baby's First Website</title>
+  <meta name="description" content="Transmit live messages to Cadet Nova at Orbit Station-99. Ask Nova anything about space, stars, zero gravity, and bedtime in orbit!" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Fredoka:wght@300..700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/src/styles/tokens.css" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="stylesheet" href="/src/styles/chat.css" />
+</head>
+<body class="chat-page-body">
+  <a href="#chat-main" class="skip-link">Skip to chat terminal</a>
+
+  <!-- Header Navigation -->
+  <header class="navbar" role="banner">
+    <div class="container nav-inner">
+      <a href="/index.html" class="nav-brand" aria-label="Return to Homepage">
+        <div class="nav-brand-logo" aria-hidden="true">🚀</div>
+        <span>Nova</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="/index.html" class="nav-link">← I’m heading home</a>
+        <a href="/index.html#showcase" class="nav-link">My inventions</a>
+        <a href="/index.html#story" class="nav-link">My bedtime story</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/index.html" class="btn-pill" aria-label="Return Home">
+          🏠 My station base
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Chat Terminal -->
+  <main id="chat-main" class="chat-main-container" tabindex="-1">
+    <div class="chat-terminal-card" role="region" aria-label="Nova Live Radio Chat Terminal">
+      <!-- Terminal Header -->
+      <div class="chat-terminal-header">
+        <div class="chat-header-identity">
+          <div class="chat-mini-avatar" aria-hidden="true">👶</div>
+          <div class="chat-header-text">
+            <h2>Radio with me, Nova</h2>
+            <div class="chat-status-indicator">
+              <span class="chat-status-dot"></span>
+              <span>ORBIT STATION-99 · I’M LIVE ON THE TWO-WAY RADIO</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #ffd166;">
+          FREQ: 104.6 MHz
+        </div>
+      </div>
+
+      <!-- Quick Space Topic Chips -->
+      <div class="chat-quick-topics" role="group" aria-label="Quick questions for Nova">
+        <span class="chat-quick-label">MY PROMPTS:</span>
+        <button type="button" class="chat-pill-btn" data-prompt="How do you sleep in space?">
+          🌙 How I sleep in space
+        </button>
+        <button type="button" class="chat-pill-btn" data-prompt="What do Saturn's rings feel like?">
+          🪐 My Saturn rings
+        </button>
+        <button type="button" class="chat-pill-btn" data-prompt="Can you drink milk in zero gravity?">
+          🥛 My milk in zero-g
+        </button>
+        <button type="button" class="chat-pill-btn" data-prompt="What is a black hole?">
+          🕳️ My black hole thoughts
+        </button>
+        <button type="button" class="chat-pill-btn" data-prompt="Have you met any aliens?">
+          👽 My alien friends
+        </button>
+        <button type="button" class="chat-pill-btn" data-prompt="What is your favorite space lullaby?">
+          🎶 My favorite lullaby
+        </button>
+      </div>
+
+      <!-- Messages Feed -->
+      <div class="chat-messages-feed" id="chat-messages-feed" role="log" aria-live="polite">
+        <!-- Welcome Message from Nova -->
+        <div class="chat-msg-row from-nova">
+          <div class="msg-bubble">
+            <div class="msg-sender-name">
+              <span>🚀 Nova</span>
+              <span>My station welcome</span>
+            </div>
+            <div class="msg-body">
+              BEEP BOOP! My radio is online! Hi, I’m Nova! 👶🚀 What would you like to know about space, the Moon, Saturn, or how I float in zero gravity? Ask me anything about the cosmos! ✨
+            </div>
+          </div>
+        </div>
+
+        <!-- Typing Indicator (Hidden by default) -->
+        <div id="chat-typing-row" class="chat-typing-row" hidden aria-hidden="true">
+          <span>I’m floating over to the radio</span>
+          <div class="typing-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Input Form -->
+      <form id="chat-input-form" class="chat-input-bar">
+        <label for="chat-text-input" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; overflow: hidden;">Ask Nova a space question</label>
+        <input 
+          type="text" 
+          id="chat-text-input" 
+          class="chat-text-input" 
+          placeholder="Ask me anything about space, stars, or zero-g..." 
+          required 
+          autocomplete="off" 
+          maxlength="200" 
+        />
+        <button type="submit" class="chat-send-btn" aria-label="Send message to Nova">
+          Transmit 📡
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Script Modules -->
+  <script type="module" src="/src/js/chat.js"></script>
+</body>
+</html>

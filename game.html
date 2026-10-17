@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080612" />
+  <title>Asteroid Dodge | Nova's Flight Deck</title>
+  <meta name="description" content="Fly with Nova and dodge a steadily growing asteroid field in this space arcade game." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Fredoka:wght@300..700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/tokens.css" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="stylesheet" href="/src/styles/game.css" />
+</head>
+<body class="game-body">
+  <div class="game-shell">
+    <header class="game-header">
+      <a class="game-brand" href="/index.html" aria-label="Back to Nova's homepage">
+        <span class="game-brand-mark" aria-hidden="true">✦</span>
+        <span>Nova’s flight deck</span>
+      </a>
+      <a class="game-home-link" href="/index.html">← Home</a>
+    </header>
+
+    <main class="game-main">
+      <section class="game-heading" aria-labelledby="game-title">
+        <div>
+          <span class="game-kicker">Arcade mission 01 · asteroid belt</span>
+          <h1 id="game-title">Asteroid dodge</h1>
+        </div>
+        <p>I steer. You spot the rocks. Nobody bonks the helmet.</p>
+      </section>
+
+      <section class="game-hud" aria-label="Flight statistics">
+        <div class="hud-stat"><span>Score</span><strong id="score-value">0000</strong></div>
+        <div class="hud-stat"><span>Best</span><strong id="best-value">0000</strong></div>
+        <div class="hud-stat"><span>Flight</span><strong id="time-value">00:00</strong></div>
+        <div class="hud-stat"><span>Sector</span><strong id="level-value">01</strong></div>
+        <div class="hud-lives" aria-label="Three lives remaining"><span>Lives</span><strong id="lives-value">♥♥♥</strong></div>
+      </section>
+
+      <section class="game-arena" aria-label="Asteroid dodge game">
+        <canvas id="game-canvas" role="img" aria-label="Nova dodges asteroids in a field of stars"></canvas>
+        <div class="arena-scanline" aria-hidden="true"></div>
+        <div id="state-overlay" class="state-overlay" hidden>
+          <span id="overlay-kicker" class="game-kicker">Flight paused</span>
+          <h2 id="overlay-title">Taking a space-breath</h2>
+          <p id="overlay-copy">Even a cosmonaut needs a snack break.</p>
+          <button id="overlay-action" class="game-button" type="button">Resume flight</button>
+        </div>
+      </section>
+
+      <div class="game-toolbar">
+        <div class="move-controls" aria-label="Touch movement controls">
+          <button class="move-button" type="button" data-move="left" aria-label="Move left" title="Move left">←</button>
+          <button class="move-button" type="button" data-move="right" aria-label="Move right" title="Move right">→</button>
+        </div>
+        <p class="key-hint"><kbd>←</kbd><kbd>→</kbd><span>or</span><kbd>A</kbd><kbd>D</kbd></p>
+        <div class="flight-actions">
+          <button id="sound-button" class="tool-button" type="button" aria-pressed="true" aria-label="Mute game sounds" title="Mute game sounds">♫</button>
+          <button id="pause-button" class="tool-button" type="button" aria-label="Pause flight" title="Pause flight">Ⅱ</button>
+        </div>
+      </div>
+      <p id="game-status" class="sr-only" aria-live="polite">Ready to launch.</p>
+    </main>
+  </div>
+
+  <section id="launch-screen" class="launch-screen" aria-labelledby="launch-title">
+    <div class="launch-topline">
+      <a class="game-home-link" href="/index.html">← Back to my station</a>
+      <span class="launch-coordinate">NOVA · ORBIT 01</span>
+    </div>
+    <div class="launch-content">
+      <div id="launch-avatar" class="launch-avatar" aria-label="Nova the baby cosmonaut"></div>
+      <div class="launch-copy">
+        <span class="game-kicker">A tiny astronaut. A wildly rude asteroid belt.</span>
+        <h2 id="launch-title">Play with me!</h2>
+        <p class="nova-joke">I packed star snacks. The asteroids packed <em>zero manners.</em> Help me scoot past them?</p>
+        <button id="start-button" class="game-button" type="button" disabled>Loading Nova…</button>
+        <p id="avatar-status" class="avatar-status" aria-live="polite">Nova is putting on her bubble helmet…</p>
+        <p class="launch-footnote">Dodge, collect points, and try not to get bonked.</p>
+      </div>
+    </div>
+    <div class="launch-bottomline"><span>Best score <strong id="launch-best">0000</strong></span><span>Three helmets. Many rocks.</span></div>
+  </section>
+
+  <script type="module" src="/src/js/asteroidDodge.js"></script>
+</body>
+</html>

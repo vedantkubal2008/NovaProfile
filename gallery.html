@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Gallery | Planet Portraits</title>
+  <meta name="description" content="Nine NASA images of planets and moons in our solar system, collected by Nova." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Fredoka:wght@300..700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/src/styles/tokens.css" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body>
+  <header class="navbar" role="banner">
+    <div class="container nav-inner">
+      <a href="/index.html" class="nav-brand" aria-label="Nova Home">
+        <div class="nav-brand-logo" aria-hidden="true">🚀</div>
+        <span>Nova</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Gallery Navigation">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/index.html#showcase" class="nav-link">My Inventions</a>
+        <a href="/index.html#story" class="nav-link">My Bedtime Story</a>
+        <a href="/chat.html" class="nav-link" style="color: #ffd166; font-weight: 700;">Talk to Me 💬</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/index.html" class="btn-pill" aria-label="Return to homepage">
+          🏠 Station Base
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="gallery-page">
+    <div class="container">
+      <div class="gallery-hero">
+        <span class="section-label">Nova’s Planet Portfolio</span>
+        <h1 class="section-title">Nine worlds, seen from space</h1>
+        <p class="section-lead" style="margin: 0 auto;">
+          I collected nine real views of planets and moons, captured by NASA missions. Each image shows a world against the dark of space.
+        </p>
+        <a href="/index.html" class="btn-pill btn-primary">Back to my station</a>
+      </div>
+
+      <div class="gallery-grid">
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Mercury</div>
+          <div class="gallery-art mercury-scene">
+            <img class="gallery-real-image" src="/assets/gallery/mercury.jpg" alt="MESSENGER view of Mercury's cratered horizon against black space" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Mercury’s Cratered Horizon</h2>
+            <p class="gallery-copy">I see Mercury’s rugged, cratered surface lit by the Sun, with its curved horizon set against the black of space.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Venus</div>
+          <div class="gallery-art venus-scene">
+            <img class="gallery-real-image" src="/assets/gallery/venus.jpg" alt="Two Mariner 10 views of Venus beneath its dense cloud layer" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Venus Beneath the Clouds</h2>
+            <p class="gallery-copy">I see two views of Venus captured by Mariner 10, showing the planet wrapped in a dense, bright cloud layer.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Earth</div>
+          <div class="gallery-art earth-scene">
+            <img class="gallery-real-image" src="/assets/gallery/earth.jpg" alt="Full-disk satellite view of Earth with cloud systems over the Americas" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Earth, Full Disk</h2>
+            <p class="gallery-copy">I see Earth’s curved blue edge and swirling clouds over the Americas, bright against the surrounding darkness.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Moon</div>
+          <div class="gallery-art moon-scene">
+            <img class="gallery-real-image" src="/assets/gallery/moon.jpg" alt="Nearly full Moon photographed from Apollo 8 against black space" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Apollo 8’s Moon</h2>
+            <p class="gallery-copy">I see the nearly full Moon as Apollo 8 photographed it, with dark lunar plains and bright, cratered highlands.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Mars</div>
+          <div class="gallery-art mars-scene">
+            <img class="gallery-real-image" src="/assets/gallery/mars.jpg" alt="Hubble portrait of Mars with rusty surface markings and a bright polar cap" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Mars in Springtime</h2>
+            <p class="gallery-copy">I see Hubble’s view of Mars with its rusty surface, dark markings, and a bright cap of seasonal polar ice.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Jupiter</div>
+          <div class="gallery-art jupiter-scene">
+            <img class="gallery-real-image" src="/assets/gallery/jupiter.jpg" alt="Juno close-up of Jupiter's turbulent cloud bands and jet streams" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Jupiter’s Turbulent Bands</h2>
+            <p class="gallery-copy">I see Jupiter’s swirling cloud bands and powerful jet streams in this close view from NASA’s Juno mission.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Saturn</div>
+          <div class="gallery-art saturn-scene">
+            <img class="gallery-real-image" src="/assets/gallery/saturn.jpg" alt="Cassini view of Saturn's crescent crossed by its rings" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Saturn’s Crescent and Rings</h2>
+            <p class="gallery-copy">I see Saturn half-lit in Cassini’s image, with its thin rings crossing the bright curve of the planet.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Uranus</div>
+          <div class="gallery-art uranus-scene">
+            <img class="gallery-real-image" src="/assets/gallery/uranus.jpg" alt="Voyager 2 image of the pale blue planet Uranus against black space" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Uranus, Pale Blue</h2>
+            <p class="gallery-copy">I see Uranus as Voyager 2 captured it: a pale blue globe with soft cloud bands fading into space.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-planet-band">Neptune</div>
+          <div class="gallery-art neptune-scene">
+            <img class="gallery-real-image" src="/assets/gallery/neptune.jpg" alt="Voyager 2 image of Neptune's deep blue globe and bright atmospheric clouds" loading="lazy" />
+          </div>
+          <div class="gallery-info">
+            <h2 class="gallery-title">Neptune, Deep Blue</h2>
+            <p class="gallery-copy">I see Neptune’s deep blue globe and bright atmospheric clouds in this Voyager 2 portrait.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,81 @@
+/* ==========================================================================
+   haX.baby Cosmic Space Theme & Design Tokens
+   Track 2: Nova, The Pocket Cosmonaut — Tier 3 Legendary Portfolio
+   ========================================================================== */
+
+:root {
+  /* Midnight orbit, aurora cyan, solar gold, and a small coral signal. */
+  --bg-cosmos: #06121d;
+  --bg-space-gradient: radial-gradient(ellipse at 30% 0%, #102c3c 0%, #071722 55%, #040b13 100%);
+  --bg-card: rgba(12, 30, 43, 0.88);
+  --bg-card-subtle: rgba(17, 43, 56, 0.78);
+  --bg-banner: #0d2937;
+  --bg-cream: #0a1d29;
+  
+  --text-main: #effbff;
+  --text-muted: #b2cbd3;
+  --text-subtle: #839da8;
+  
+  --accent-berry: #ff8066;
+  --accent-berry-hover: #ff9b7f;
+  --accent-berry-light: rgba(255, 128, 102, 0.16);
+  --accent-bark: #9bbac5;
+  --accent-gold: #ffd166;
+  --accent-gold-soft: rgba(255, 209, 102, 0.15);
+  --accent-starlight: #65dcf2;
+  --accent-aurora: #56dfbe;
+  
+  --border-soft: rgba(126, 184, 198, 0.2);
+  --border-strong: rgba(255, 209, 102, 0.38);
+  --border-accent: rgba(255, 128, 102, 0.38);
+  
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 16px 40px -10px rgba(0, 0, 0, 0.65), 0 0 1px rgba(255, 255, 255, 0.12);
+  --shadow-float: 0 25px 60px -10px rgba(101, 220, 242, 0.2);
+  --shadow-glow: 0 0 35px rgba(255, 209, 102, 0.4);
+
+  /* Typography */
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-bubbly: 'Fredoka', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Space Grotesk', 'Courier New', monospace;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Lunar Station polar-light mode */
+[data-theme="lunar"] {
+  --bg-cosmos: #eaf5f7;
+  --bg-space-gradient: radial-gradient(ellipse at 30% 0%, #d6edf0 0%, #edf7f8 62%, #e4f0f3 100%);
+  --bg-card: rgba(250, 254, 255, 0.92);
+  --bg-card-subtle: #e1eff2;
+  --bg-banner: #d4e9ee;
+  --bg-cream: #f6fbfc;
+  
+  --text-main: #17313b;
+  --text-muted: #49646e;
+  --text-subtle: #718892;
+  
+  --accent-berry: #bd5948;
+  --accent-berry-hover: #a7473a;
+  --accent-berry-light: rgba(189, 89, 72, 0.12);
+  --accent-bark: #35515b;
+  --accent-gold: #9a6500;
+  --accent-gold-soft: rgba(211, 155, 42, 0.16);
+  --accent-starlight: #087f9a;
+  --accent-aurora: #177e69;
+  
+  --border-soft: rgba(52, 91, 104, 0.18);
+  --border-strong: rgba(154, 101, 0, 0.34);
+  --border-accent: rgba(189, 89, 72, 0.26);
+  
+  --shadow-sm: 0 4px 12px rgba(23, 49, 59, 0.08);
+  --shadow-card: 0 16px 36px -12px rgba(23, 49, 59, 0.14), 0 2px 8px rgba(23, 49, 59, 0.05);
+  --shadow-float: 0 24px 50px -15px rgba(8, 127, 154, 0.18);
+  --shadow-glow: 0 0 30px rgba(211, 155, 42, 0.3);
+}

@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Responsive Chaos Mode Styles (+5 pts Side Quest)
+   Playful early-2000s GeoCities nostalgic delight
+   ========================================================================== */
+
+.chaos-marquee-bar {
+  background: repeating-linear-gradient(
+    45deg,
+    #ffd166,
+    #ffd166 15px,
+    #06121d 15px,
+    #06121d 30px
+  );
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 6px 0;
+  border-bottom: 2px solid #65dcf2;
+}
+
+.chaos-marquee-bar[hidden] {
+  display: none !important;
+}
+
+.chaos-marquee-track {
+  display: inline-block;
+  animation: chaos-marquee-scroll 18s linear infinite;
+  padding-left: 100%;
+}
+
+@keyframes chaos-marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Floating bouncy retro stickers */
+.chaos-floating-badge {
+  position: fixed;
+  background: #ffd166;
+  color: #06121d;
+  border: 2px dashed #ff8066;
+  box-shadow: 4px 4px 0px #02080c;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  border-radius: 4px;
+  z-index: 9998;
+  pointer-events: none;
+  animation: chaos-wobble 2s ease-in-out infinite alternate;
+}
+
+@keyframes chaos-wobble {
+  0% { transform: scale(1) rotate(-4deg); }
+  100% { transform: scale(1.08) rotate(5deg) translateY(-8px); }
+}
+
+/* Active body chaos overrides */
+body.chaos-mode-active {
+  background-image: 
+    radial-gradient(circle at 10px 10px, rgba(255, 209, 102, 0.15) 2px, transparent 0),
+    radial-gradient(circle at 30px 30px, rgba(101, 220, 242, 0.12) 3px, transparent 0);
+  background-size: 40px 40px;
+}
+
+body.chaos-mode-active .project-card {
+  border-style: dashed !important;
+  border-width: 3px !important;
+  animation: subtle-float 3s ease-in-out infinite alternate;
+}
+
+body.chaos-mode-active .nav-brand {
+  animation: chaos-rainbow-text 3s linear infinite;
+}
+
+@keyframes chaos-rainbow-text {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
