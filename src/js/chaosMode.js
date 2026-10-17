@@ -11,6 +11,7 @@ import { sounds } from './audio.js';
 
 export function initChaosMode() {
   const toggleBtn = document.getElementById('chaos-toggle-btn');
+  const toggleIcon = document.getElementById('chaos-toggle-icon');
   const banner = document.getElementById('chaos-marquee');
   if (!toggleBtn) return;
 
@@ -24,13 +25,19 @@ export function initChaosMode() {
       document.body.classList.add('chaos-mode-active');
       sounds.playTwinkle();
       toggleBtn.setAttribute('aria-pressed', 'true');
-      toggleBtn.innerHTML = '✨ Exit Chaos Mode';
+      toggleBtn.setAttribute('aria-label', 'Chaos Mode enabled. Click to turn off');
+      toggleBtn.title = 'Turn off Chaos Mode';
+      toggleBtn.classList.add('is-active');
+      if (toggleIcon) toggleIcon.textContent = '✨';
       if (banner) banner.hidden = false;
       spawnFloatingBadges();
     } else {
       document.body.classList.remove('chaos-mode-active');
       toggleBtn.setAttribute('aria-pressed', 'false');
-      toggleBtn.innerHTML = '🌀 Chaos Mode (+5 pts)';
+      toggleBtn.setAttribute('aria-label', 'Toggle Retro Space Chaos Mode');
+      toggleBtn.title = 'Toggle Chaos Mode';
+      toggleBtn.classList.remove('is-active');
+      if (toggleIcon) toggleIcon.textContent = '🌀';
       if (banner) banner.hidden = true;
       removeFloatingBadges();
     }
