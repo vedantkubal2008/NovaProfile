@@ -143,7 +143,7 @@ export function initEasterEgg() {
     const ship = document.createElement('span');
     ship.className = 'nova-ship-flight';
     ship.setAttribute('aria-hidden', 'true');
-    ship.textContent = '🚀';
+    ship.textContent = '🛸';
     ship.addEventListener('animationend', () => ship.remove(), { once: true });
     document.body.append(ship);
   }

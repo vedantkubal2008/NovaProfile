@@ -127,11 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateSoundBtnUI(isMuted) {
     if (!soundToggleBtn) return;
     if (isMuted) {
-      soundToggleBtn.setAttribute('aria-label', 'Radio Muted. Click to enable space audio');
+      soundToggleBtn.setAttribute('aria-label', 'Space sound effects off. Click to enable');
       soundToggleBtn.setAttribute('aria-pressed', 'false');
-      soundToggleBtn.innerHTML = '🔇 <span class="btn-text">Unmute</span>';
+      soundToggleBtn.innerHTML = '🔇 <span class="btn-text">Unmute sounds</span>';
     } else {
-      soundToggleBtn.setAttribute('aria-label', 'Space Radio Active. Click to mute');
+      soundToggleBtn.setAttribute('aria-label', 'Space sound effects on. Click to mute');
       soundToggleBtn.setAttribute('aria-pressed', 'true');
       soundToggleBtn.innerHTML = '📡 <span class="btn-text">Comms ON</span>';
     }

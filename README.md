@@ -61,6 +61,10 @@ Told through 4 interactive scroll scenes (all under 50 words each):
 
 ## 💻 Local Development
 ```bash
-npm run dev   # Live at http://localhost:5173/
-npm run build # Tested 0-error production bundle
+npm run server # SQLite API and static server on http://localhost:3001/
+npm run dev    # Vite app on http://localhost:5173/NovaProfile/ (run in a second terminal)
+npm run build  # Build the production site
+npm start      # Serve the built site and shared guestbook API
 ```
+
+The shared mission log uses Node's built-in SQLite support (Node 22.5 or newer) and stores data in `data/guestbook.sqlite`. Set `DATABASE_PATH` to a persistent disk location when deploying so messages survive server restarts. For a separate GitHub Pages frontend, build with `VITE_API_BASE_URL` set to the API origin and set `ALLOWED_ORIGIN` on the API server to the Pages origin. GitHub Pages itself cannot run the SQLite API.
