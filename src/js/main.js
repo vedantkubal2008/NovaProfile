@@ -10,7 +10,7 @@ import { initEyeTracker } from './eyeTracker.js';
 import { initConstellationLoom } from './constellationLoom.js';
 import { initAuroraJar } from './auroraJar.js';
 import { initStoryScroll } from './storyScroll.js';
-import { initGuestbook } from './guestbook.js';
+import { initGuestbook } from './guestbook.js?v=runtime-env-fix-4f6d000';
 import { initHitCounter } from './odometer.js';
 import { initChaosMode } from './chaosMode.js?v=0182b7d';
 import { initEasterEgg } from './easterEgg.js';
