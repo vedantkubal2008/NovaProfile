@@ -1,5 +1,5 @@
 # 🚀 Nova the Pocket Cosmonaut | Baby's First Website
-> **Track 2: Original Character — Tier 3 Legendary Space Edition**  
+> **Track 2:**
 > Built for the **haX.baby** 48-Hour Online Hackathon (17–19 October 2026)
 
 ---
@@ -66,5 +66,6 @@ npm run dev    # Vite app on http://localhost:5173/NovaProfile/ (run in a second
 npm run build  # Build the production site
 npm start      # Serve the built site and shared guestbook API
 ```
-
 The shared mission log uses Node's built-in SQLite support (Node 22.5 or newer) and stores data in `data/guestbook.sqlite`. Set `DATABASE_PATH` to a persistent disk location when deploying so messages survive server restarts. For a separate GitHub Pages frontend, build with `VITE_API_BASE_URL` set to the API origin and set `ALLOWED_ORIGIN` on the API server to the Pages origin. GitHub Pages itself cannot run the SQLite API.
+
+Project Link : https://vedantkubal2008.github.io/NovaProfile/
