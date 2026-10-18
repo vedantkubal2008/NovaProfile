@@ -435,12 +435,19 @@ h1, h2, h3, .serif {
   color: #251729;
 }
 
+.hero-actions > #easter-egg-trigger {
+  width: 70px;
+  height: 58px;
+  border-radius: 20px;
+  font-size: 2.5rem;
+}
+
 .nova-ship-flight {
   position: fixed;
   left: 50%;
   bottom: -84px;
   z-index: 0;
-  font-size: 72px;
+  font-size: 112px;
   line-height: 1;
   pointer-events: none;
   filter: drop-shadow(0 0 12px rgba(255, 209, 102, 0.8));
@@ -451,13 +458,13 @@ h1, h2, h3, .serif {
   content: "";
   position: absolute;
   z-index: -1;
-  top: 70%;
+  top: 62%;
   left: 50%;
-  width: 8px;
-  height: 54px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, rgba(255, 209, 102, 0.9), rgba(255, 112, 166, 0));
-  filter: blur(4px);
+  width: 76px;
+  height: 74px;
+  border-radius: 0 0 50% 50%;
+  background: radial-gradient(ellipse at top, rgba(101, 220, 242, 0.68), rgba(255, 209, 102, 0.32) 40%, transparent 76%);
+  filter: blur(5px);
   transform: translateX(-50%);
 }
 
@@ -470,8 +477,12 @@ h1, h2, h3, .serif {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nova-ship-flight {
-    animation-duration: 1.2s;
+  .nova-ship-flight,
+  .hero-ufo-sticker,
+  .hero-planet-sticker,
+  .hero-doodles span,
+  .hero-copy {
+    animation: none;
   }
 }
 
@@ -498,6 +509,38 @@ h1, h2, h3, .serif {
 .hero-section {
   padding: 60px 0 80px;
   position: relative;
+}
+
+.hero-copy {
+  animation: hero-copy-arrive 0.75s cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+@keyframes hero-copy-arrive {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-doodles {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  margin: -8px 0 14px;
+  font-size: 1.55rem;
+}
+
+.hero-doodles span {
+  display: inline-block;
+  animation: doodle-hop 2.8s ease-in-out infinite;
+}
+
+.hero-doodles span:nth-child(2) { animation-delay: -0.7s; }
+.hero-doodles span:nth-child(3) { animation-delay: -1.4s; }
+.hero-doodles span:nth-child(4) { animation-delay: -2.1s; }
+
+@keyframes doodle-hop {
+  0%, 100% { transform: translateY(2px) rotate(-7deg); }
+  50% { transform: translateY(-7px) rotate(8deg); }
 }
 
 .hero-grid {
@@ -585,6 +628,40 @@ h1, h2, h3, .serif {
   transition: transform 0.15s ease-out;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-ufo-sticker {
+  position: absolute;
+  z-index: 2;
+  top: 5%;
+  right: -18px;
+  font-size: 5.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 8px 12px rgba(101, 220, 242, 0.42));
+  pointer-events: none;
+  animation: ufo-bob 3.2s ease-in-out infinite;
+}
+
+.hero-planet-sticker {
+  position: absolute;
+  z-index: 2;
+  bottom: 7%;
+  left: -16px;
+  font-size: 3.6rem;
+  line-height: 1;
+  filter: drop-shadow(0 6px 10px rgba(255, 209, 102, 0.35));
+  pointer-events: none;
+  animation: planet-drift 4.2s ease-in-out infinite;
+}
+
+@keyframes ufo-bob {
+  0%, 100% { transform: translate(0, 0) rotate(-7deg); }
+  50% { transform: translate(-8px, -14px) rotate(6deg); }
+}
+
+@keyframes planet-drift {
+  0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+  50% { transform: translate(7px, -10px) rotate(8deg); }
 }
 
 .avatar-halo {
